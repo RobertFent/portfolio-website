@@ -3,13 +3,41 @@ services:
     build: .
     ports:
       - 3000:3000
-    environment:
-      FORKS: 1
-      NODE_ENV: development # todo -> change to production
-      PORT: 3000
-      DB_LOCATION: ./data/robotswebsite.db
-    # volumes:
-    #   - ./app:/stackzero/app
+    env_file: .env
+    volumes:
+      - appdata:/app/data
+      - ./app:/stackzero/app
     #   - ./core:/stackzero/core
-    # env_file:
-    #   - .env
+
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - certs:/etc/nginx/certs:ro # persist and manage TLS certs
+      - vhost_data:/etc/nginx/vhost.d #needed for dynamic config overrides
+      - html_data:/usr/share/nginx/html # required for ACME HTTP-01 challenge
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    restart: unless-stopped
+
+  acme-companion:
+    image: nginxproxy/acme-companion
+    container_name: nginx-acme
+    env_file: .env-acme
+    volumes:
+      - certs:/etc/nginx/certs
+      - html_data:/usr/share/nginx/html
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - nginx-proxy
+    restart: unless-stopped
+
+volumes:
+  appdata:
+  certs:
+  html_data:
+  vhost_data:
+  acme:
