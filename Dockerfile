@@ -1,4 +1,6 @@
-FROM ghcr.io/RobertFent/StackZero:production
+FROM ghcr.io/robertfent/stackzero
 
-COPY ./src app/src
-COPY ./core app/core
+# WORKDIR /stackzero
+
+# COPY ./app stackzero/app
+# COPY ./core stackzero/core

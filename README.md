@@ -19,4 +19,6 @@ If you want to update to a specific version just edit the image tag in the docke
 In any case you can just overwrite the core logic if you find yourself in a situation where something is missing<br>
 Add the code to core/
 ## todo
-overwrite logic
+
+- overwrite logic -> currently all content from app is copied to app in docker and replaces everything
+- todo proper compose for deployment with nginx and acme like in robots website
