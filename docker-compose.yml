@@ -1,6 +1,6 @@
 services:
   stackzero:
-    image: ghcr.io/robertfent/stackzero
+    image: ghcr.io/robertfent/stackzero:production
     container_name: stackzero
     ports:
       - 3000:3000
@@ -12,7 +12,7 @@ services:
     #   - ./core:/stackzero/core # todo: make core overwriteable
 
   migrate-stackzero:
-    image: ghcr.io/robertfent/stackzero
+    image: ghcr.io/robertfent/stackzero:production
     container_name: migrate-stackzero
     entrypoint: ["npm", "run", "migrate"]
     env_file: .env
