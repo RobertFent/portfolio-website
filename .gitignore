@@ -1,4 +1,13 @@
 .env
 .env-acme
-app
-!app/.gitkeep
+/app/*
+/core/*
+/data/*
+/data/migrations/*
+/static/*
+!/app/.gitkeep
+!/core/.gitkeep
+!/data/.gitkeep
+!/data/migrations/
+!/data/migrations/.gitkeep
+!/static/.gitkeep

@@ -1,13 +1,23 @@
 services:
-  app:
-    build: .
+  stackzero:
+    image: ghcr.io/robertfent/stackzero
+    container_name: stackzero
     ports:
       - 3000:3000
     env_file: .env
     volumes:
-      - appdata:/app/data
       - ./app:/stackzero/app
-    #   - ./core:/stackzero/core
+      - ./static:/stackzero/static
+      - ./data:/stackzero/data
+    #   - ./core:/stackzero/core # todo: make core overwriteable
+
+  migrate-stackzero:
+    image: ghcr.io/robertfent/stackzero
+    container_name: migrate-stackzero
+    entrypoint: ["npm", "run", "migrate"]
+    env_file: .env
+    volumes:
+      - ./data:/stackzero/data
 
   nginx-proxy:
     image: nginxproxy/nginx-proxy
@@ -36,7 +46,6 @@ services:
     restart: unless-stopped
 
 volumes:
-  appdata:
   certs:
   html_data:
   vhost_data:

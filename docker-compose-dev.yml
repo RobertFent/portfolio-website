@@ -1,0 +1,16 @@
+services:
+  stackzero:
+    image: ghcr.io/robertfent/stackzero:production
+    command: ["npm", "run", "start-local"]
+    ports:
+      - 3000:3000
+    environment:
+      - FORKS=1
+      - NODE_ENV=development
+      - DB_LOCATION=./data/testingapp.db
+      - PORT=3000
+    volumes:
+      - ./app:/stackzero/app
+      - ./static:/stackzero/static
+      - ./data:/stackzero/data
+    #   - ./core:/stackzero/core # todo: make core overwriteable
