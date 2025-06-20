@@ -35,7 +35,9 @@ services:
   acme-companion:
     image: nginxproxy/acme-companion
     container_name: nginx-acme
-    env_file: .env-acme
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      # - ACME_CA_URI=https://acme-staging-v02.api.letsencrypt.org/directory # use this for debugging tls challenge
     volumes:
       - certs:/etc/nginx/certs
       - html_data:/usr/share/nginx/html

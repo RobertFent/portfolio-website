@@ -2,38 +2,71 @@
 
 # Template for StackZero SaaS
 
-This is the template repository for [StackZero](https://github.com/RobertFent/StackZero)
+This is the template repository for [StackZero](https://github.com/RobertFent/StackZero).<br>
 
-## How to use
+Start building minimal SaaS apps with Docker & HTMX in minutes - how to
 
-### Create your own routes and htmx pages -> tutorial will soon follow
-Add the code to app/
+## 🚀 Quick Start
 
-### Launch everything with docker
-On first launch just run this command:
 ```bash
-docker compose up -d 
+git clone https://github.com/RobertFent/Stackzero-template.git
+cd Stackzero-template
+cp .env-template .env
 ```
-Or to always stay on the latest production ready version:
+
+fill out .env and then run following command:
+
 ```bash
-docker compose up --build --pull always
+docker compose up -d
 ```
+
+## 🛠️ How to Customize
+
+Create your own routes and HTMX pages by editing the `app/` folder.<br>
+You can:
+
+-   Add or replace HTMX views
+-   Define new routes in `app/routes.js`
+-   Use the example templates in `templates/` to get started quickly
+
+Then launch everything with docker:
+
+```bash
+docker compose up -d --pull always
+```
+
 If you want to update to a specific version just edit the image tag in the dockerfile and run the command from above
 
-### Further development
-Get the definitions for the core modules:
+## 🧪 Local Development
+
+Use the dev setup with hot-reloading:
+
 ```bash
-docker cp stackzero-template-stackzero-1:/stackzero/core/definitions.js core
-```
-Hot reload is enabled in the dev compose file.<br>
-While the container is running just update code in /app locally and the server will automatically restart with the new changes
-```bash
-docker compose -f docker-compose-dev.yml up --build --pull always
+docker compose -f docker-compose-dev.yml up --pull always
 ```
 
-### Optional - This feature is not released yet
-In any case you can just overwrite the core logic if you find yourself in a situation where something is missing<br>
-Add the code to core/
+-   Your local app/ folder will be mounted
+-   Code changes trigger automatic reloads
+-   Use the examples in /templates as a starting point
+
+You can also install Node-based tools if needed:
+
+```bash
+npm install
+```
+
+## 📁 Folder Structure
+
+```
+.
+├── app/               # Your frontend logic (HTMX views, routes)
+├── core/              # Advanced: override internal modules - feature will soon follow
+├── templates/         # Example files to get started quickly
+├── docker-compose.yml # Production deployment config
+├── docker-compose-dev.yml # Development config (hot reload)
+```
 
 ## todo
-- overwrite logic -> currently all content from app is copied to app in docker and replaces everything
+
+-   overwrite logic -> currently all content from app is copied to app in docker and replaces everything
+-   Get the definitions for the core modules, (not working: docker cp stackzero-template-stackzero-1:/stackzero/core/definitions.js core)
