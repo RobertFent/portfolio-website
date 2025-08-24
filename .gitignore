@@ -10,4 +10,5 @@ node_modules
 !/data/.gitkeep
 !/data/migrations/
 !/data/migrations/.gitkeep
-!/static/.gitkeep
+!/static/js/
+!/static/css/

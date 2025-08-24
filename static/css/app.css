@@ -1,0 +1,26 @@
+:root {
+	--color-primary: #000000;
+	--color-secondary: #ffffff;
+	--color-accent: #c9a65b;
+	--color-primary-grey: #1a1a1a;
+	--color-secondary-grey: #d1d5db;
+}
+/* put all shared css here */
+a {
+	color: var(--color-accent);
+	text-decoration: none;
+	border-radius: var(--radius-sm);
+	transition: background 0.2s, color 0.2s;
+	font-weight: 500;
+}
+a:hover,
+a:focus {
+	background: var(--color-accent);
+	color: var(--color-secondary);
+	text-decoration: underline;
+}
+.colored-component {
+	background: var(--color-primary);
+	color: var(--color-secondary);
+	border-radius: var(--radius-xl);
+}

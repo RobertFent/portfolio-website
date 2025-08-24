@@ -13,4 +13,4 @@ services:
       - ./app:/stackzero/app
       - ./static:/stackzero/static
       - ./data:/stackzero/data
-      # - ./core:/stackzero/core # todo: make core overridable
+      # - ./core:/stackzero/core # enable this line after copying content of the folder to local machine to overwrite core logic manually

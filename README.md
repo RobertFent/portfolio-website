@@ -4,24 +4,39 @@
 
 This is the template repository for [StackZero](https://github.com/RobertFent/StackZero).<br>
 
-Start building minimal SaaS apps with Docker & HTMX in minutes - how to
-
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 git clone https://github.com/RobertFent/Stackzero-template.git
 cd Stackzero-template
-cp .env-template .env
+cp -R templates/webpage_new/app/* app/
+cp -R templates/webpage_new/data/* data/
+cp -R templates/webpage_new/static/* static/
 ```
 
-fill out .env and then run following command:
+### 🧪 Local Development
+
+Use the dev setup with hot-reloading:
 
 ```bash
-docker compose up -d
+docker compose -f docker-compose-dev.yml up
 ```
 
-## 🛠️ How to Customize
+### ❄️ Launch the Full Stack
 
+If you want to launch the full web app stack with nginx and acme, fill out the .env and launch the full docker compose:
+
+```bash
+cp .env-template .env
+docker compose up
+```
+
+## How to Customize
+
+### 🎨 Frontend
+
+You will only need to do modifications in the frontend part most of the times which is located in the `app/` folder.<br>
+For this you should know how to use HTMX: [HTMX](https://htmx.org/docs/).<br>
 Create your own routes and HTMX pages by editing the `app/` folder.<br>
 You can:
 
@@ -29,44 +44,37 @@ You can:
 -   Define new routes in `app/routes.js`
 -   Use the example templates in `templates/` to get started quickly
 
-Then launch everything with docker:
+### 🗃️ Data Layer
+
+The data layer is located in the `data/` and `data/migrations/`folder. There you can write your migration sql files.<br>
+After inital launch the sqlite database is automatically created and you can easily back it up.
+
+### 🧠 Backend Logic
+
+If you want to override some of the core backend logic, just copy the `core/` folder from the docker container to your local machine and uncomment the last line in the docker compose file.<br>
 
 ```bash
-docker compose up -d --pull always
+docker compose -f docker-compose-dev.yml up -d
+CONTAINER=$(docker compose -f docker-compose-dev.yml ps -q stackzero)
+docker cp "$CONTAINER":/stackzero/core/. ./core/
 ```
 
-If you want to update to a specific version just edit the image tag in the dockerfile and run the command from above
+Afterwards the core folder is also mounted and you can modify its content as you please.
 
-## 🧪 Local Development
+## How StackZero Works
 
-Use the dev setup with hot-reloading:
+Your local `app/`, `data/` and `static/` folders will be mounted into the docker container.<br>
+The application then launches the frontend defined in the `app` folder with the data layer defined in the `data` folder.
 
-```bash
-docker compose -f docker-compose-dev.yml up --pull always
-```
+### 📂 Folder Structure
 
--   Your local app/ folder will be mounted
--   Code changes trigger automatic reloads
--   Use the examples in /templates as a starting point
-
-You can also install Node-based tools if needed:
-
-```bash
-npm install
-```
-
-## 📁 Folder Structure
-
-```
+```txt
 .
-├── app/               # Your frontend logic (HTMX views, routes)
-├── core/              # Advanced: override internal modules - feature will soon follow
-├── templates/         # Example files to get started quickly
-├── docker-compose.yml # Production deployment config
-├── docker-compose-dev.yml # Development config (hot reload)
+├── app/                    # Your frontend logic (HTMX views, routes)
+├── data/                   # Your sql files defining the data layer (schemas, data, migrations)
+├── static/                 # All the needed static files like the htmx client and custom images display on the webapp
+├── core/                   # My backend logic which can be overriden
+├── templates/              # Example files to get started quickly
+├── docker-compose.yml      # Production deployment config
+├── docker-compose-dev.yml  # Development config (hot reload)
 ```
-
-## todo
-
--   overwrite logic -> currently all content from app is copied to app in docker and replaces everything
--   Get the definitions for the core modules, (not working: docker cp stackzero-template-stackzero-1:/stackzero/core/definitions.js core)
