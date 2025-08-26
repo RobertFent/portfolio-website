@@ -78,3 +78,41 @@ The application then launches the frontend defined in the `app` folder with the 
 ├── docker-compose.yml      # Production deployment config
 ├── docker-compose-dev.yml  # Development config (hot reload)
 ```
+
+## Bonus: How To Easily Fork This Template
+
+You need to create an empty git repo first.<br>
+Afterwards just point with the origin to your repo and with the upstream to this template repo.
+
+```bash
+git remote rename origin upstream
+git remote add origin {your .git url}
+```
+
+Added changes to your repo:
+
+```bash
+git push -u origin master
+```
+
+Fetch changes from this repo:
+
+```bash
+git fetch upstream
+git rebase upstream/master
+```
+
+If you want to track your own `app/`, `data/` and `static/` folders just delete them from the .gitignore file
+
+Now if you are in your own forked repo you have to set proper upstream pointing to the template repo:
+
+```bash
+git remote add upstream git@github.com:RobertFent/StackZero-template.git
+```
+
+Then you can pull changes like this:
+
+```bash
+git fetch upstream
+git rebase upstream/master
+```
