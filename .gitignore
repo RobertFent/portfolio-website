@@ -1,10 +1,6 @@
 node_modules
 .env
-/app/*
 /core/*
-/data/*
-/data/migrations/*
-/static/*
 !/app/.gitkeep
 !/core/.gitkeep
 !/data/.gitkeep
