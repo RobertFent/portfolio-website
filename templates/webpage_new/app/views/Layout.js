@@ -30,21 +30,6 @@ export const Layout = (Main) => {
 						defer
 					></script>
 
-					<!-- Google tag (gtag.js) -->
-					<script
-						async
-						src="https://www.googletagmanager.com/gtag/js?id=G-VVR2WGWTBG"
-					></script>
-					<script>
-						window.dataLayer = window.dataLayer || [];
-						function gtag() {
-							dataLayer.push(arguments);
-						}
-						gtag('js', new Date());
-
-						gtag('config', 'G-VVR2WGWTBG');
-					</script>
-
 					<!-- Styles -->
 					<link rel="stylesheet" href="/static/css/reset.css" />
 					<link rel="stylesheet" href="/static/css/app.css" />
