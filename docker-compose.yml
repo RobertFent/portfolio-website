@@ -13,6 +13,7 @@ services:
       - ./static:/stackzero/static
       - ./data:/stackzero/data
     #   - ./core:/stackzero/core # todo: make core overridable
+    restart: unless-stopped
 
   migrate-stackzero:
     image: ghcr.io/robertfent/stackzero:v1.0.0
