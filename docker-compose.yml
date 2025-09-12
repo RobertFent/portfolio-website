@@ -1,6 +1,6 @@
 services:
   stackzero:
-    image: ghcr.io/robertfent/stackzero:v1.0.0
+    image: ghcr.io/robertfent/stackzero:production
     container_name: stackzero
     ports:
       - 3000:3000
@@ -12,11 +12,11 @@ services:
       - ./app:/stackzero/app
       - ./static:/stackzero/static
       - ./data:/stackzero/data
-    #   - ./core:/stackzero/core # todo: make core overridable
+      # - ./core:/stackzero/core # enable this line after copying content of the folder to local machine to overwrite core logic manually
     restart: unless-stopped
 
   migrate-stackzero:
-    image: ghcr.io/robertfent/stackzero:v1.0.0
+    image: ghcr.io/robertfent/stackzero:production
     container_name: migrate-stackzero
     entrypoint: ["npm", "run", "migrate"]
     env_file: .env
