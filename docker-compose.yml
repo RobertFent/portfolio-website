@@ -31,7 +31,7 @@ services:
       - 443:443
     volumes:
       - certs:/etc/nginx/certs:ro # persist and manage TLS certs
-      - vhost_data:/etc/nginx/vhost.d #needed for dynamic config overrides
+      - vhost_data:/etc/nginx/vhost.d # needed for dynamic config overrides
       - html_data:/usr/share/nginx/html # required for ACME HTTP-01 challenge
       - /var/run/docker.sock:/tmp/docker.sock:ro
     restart: unless-stopped

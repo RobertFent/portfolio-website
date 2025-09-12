@@ -1,14 +1,11 @@
 services:
   stackzero:
-    image: ghcr.io/robertfent/stackzero:v1.0.0-staging
+    image: ghcr.io/robertfent/stackzero:staging
     command: ["npm", "run", "start-local"]
     ports:
       - 3000:3000
-    environment:
-      - FORKS=1
-      - NODE_ENV=development
-      - DB_LOCATION=./data/testingapp.db
-      - PORT=3000
+    env_file:
+      - .env
     volumes:
       - ./app:/stackzero/app
       - ./static:/stackzero/static
