@@ -14,6 +14,8 @@ services:
       - ./data:/stackzero/data
       # - ./core:/stackzero/core # enable this line after copying content of the folder to local machine to overwrite core logic manually
     restart: unless-stopped
+    networks:
+      - nginxproxy
 
   migrate-stackzero:
     image: ghcr.io/robertfent/stackzero:production
@@ -22,6 +24,8 @@ services:
     env_file: .env
     volumes:
       - ./data:/stackzero/data
+    networks:
+      - nginxproxy
 
   nginx-proxy:
     image: nginxproxy/nginx-proxy
@@ -35,6 +39,8 @@ services:
       - html_data:/usr/share/nginx/html # required for ACME HTTP-01 challenge
       - /var/run/docker.sock:/tmp/docker.sock:ro
     restart: unless-stopped
+    networks:
+      - nginxproxy
 
   acme-companion:
     image: nginxproxy/acme-companion
@@ -50,9 +56,15 @@ services:
     depends_on:
       - nginx-proxy
     restart: unless-stopped
+    networks:
+      - nginxproxy
 
 volumes:
   certs:
   html_data:
   vhost_data:
   acme:
+
+networks:
+  nginxproxy:
+    external: true
