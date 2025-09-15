@@ -19,20 +19,13 @@ export const init = async ({ app, db }) => {
 		}
 		const timestamp = new Date().toISOString();
 		db.prepare(
-			'INSERT INTO contact_entries (id, timestamp, author, content) VALUES (?, ?, ?, ?)'
+			sql`INSERT INTO contact_entries (id, timestamp, author, content) VALUES (?, ?, ?, ?)`
 		).run(randomUUID(), timestamp, author, content);
 		return render(request, reply);
 	});
 
 	const render = async (_, reply) => {
-		const contactEntries = db
-			.prepare(
-				sql`SELECT * FROM contact_entries ORDER BY timestamp DESC LIMIT 5`
-			)
-			.all();
-
 		return reply.render(Contact, {
-			entries: contactEntries,
 			addSuccess: 'true'
 		});
 	};

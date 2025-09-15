@@ -9,7 +9,7 @@ import { ErrorMessage } from './ErrorMessage.js';
  *
  * @returns {string}
  */
-export const Contact = ({ entries, addSuccess }) => {
+export const Contact = ({ addSuccess }) => {
 	return html`
 		<div id="inner-contact">
 			<style>
@@ -235,31 +235,6 @@ export const Contact = ({ entries, addSuccess }) => {
 					</p>
 				</div>
 			</div>
-			<p class="table-label">Latest messages ...</p>
-			<table>
-				<thead>
-					<tr>
-						<th>Date</th>
-						<th>Author</th>
-						<th>Message</th>
-					</tr>
-				</thead>
-				<tbody>
-					${entries.map((entry) => {
-						return ContactEntry(entry);
-					})}
-				</tbody>
-			</table>
 		</div>
-	`;
-};
-
-const ContactEntry = (entry) => {
-	return html`
-		<tr>
-			<td>${new Date(entry.timestamp).toLocaleString()}</td>
-			<td>${entry.author}</td>
-			<td>${entry.content}</td>
-		</tr>
 	`;
 };
