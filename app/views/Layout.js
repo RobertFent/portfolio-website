@@ -70,7 +70,7 @@ export const Layout = (Main) => {
 						    dataLayer.push(arguments);
 						}
 						gtag('js', new Date());
-						gtag('config', 'G-VVR2WGWTBG');
+						gtag('config', 'G-VVR2WGWTBG', {'anonymize_ip': true});
 					</script>
 					<!-- end of Google Analytics-->
 
